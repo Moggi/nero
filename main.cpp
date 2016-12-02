@@ -20,57 +20,17 @@ int main(int argc, char** argv)
 		Vertex(glm::vec3(-1, -1, -1), glm::vec2(1, 0), glm::vec3(0, 0, -1)),
 		Vertex(glm::vec3(-1, 1, -1), glm::vec2(0, 0), glm::vec3(0, 0, -1)),
 		Vertex(glm::vec3(1, 1, -1), glm::vec2(0, 1), glm::vec3(0, 0, -1)),
-		Vertex(glm::vec3(1, -1, -1), glm::vec2(1, 1), glm::vec3(0, 0, -1)),
-
-		Vertex(glm::vec3(-1, -1, 1), glm::vec2(1, 0), glm::vec3(0, 0, 1)),
-		Vertex(glm::vec3(-1, 1, 1), glm::vec2(0, 0), glm::vec3(0, 0, 1)),
-		Vertex(glm::vec3(1, 1, 1), glm::vec2(0, 1), glm::vec3(0, 0, 1)),
-		Vertex(glm::vec3(1, -1, 1), glm::vec2(1, 1), glm::vec3(0, 0, 1)),
-
-		Vertex(glm::vec3(-1, -1, -1), glm::vec2(0, 1), glm::vec3(0, -1, 0)),
-		Vertex(glm::vec3(-1, -1, 1), glm::vec2(1, 1), glm::vec3(0, -1, 0)),
-		Vertex(glm::vec3(1, -1, 1), glm::vec2(1, 0), glm::vec3(0, -1, 0)),
-		Vertex(glm::vec3(1, -1, -1), glm::vec2(0, 0), glm::vec3(0, -1, 0)),
-
-		Vertex(glm::vec3(-1, 1, -1), glm::vec2(0, 1), glm::vec3(0, 1, 0)),
-		Vertex(glm::vec3(-1, 1, 1), glm::vec2(1, 1), glm::vec3(0, 1, 0)),
-		Vertex(glm::vec3(1, 1, 1), glm::vec2(1, 0), glm::vec3(0, 1, 0)),
-		Vertex(glm::vec3(1, 1, -1), glm::vec2(0, 0), glm::vec3(0, 1, 0)),
-
-		Vertex(glm::vec3(-1, -1, -1), glm::vec2(1, 1), glm::vec3(-1, 0, 0)),
-		Vertex(glm::vec3(-1, -1, 1), glm::vec2(1, 0), glm::vec3(-1, 0, 0)),
-		Vertex(glm::vec3(-1, 1, 1), glm::vec2(0, 0), glm::vec3(-1, 0, 0)),
-		Vertex(glm::vec3(-1, 1, -1), glm::vec2(0, 1), glm::vec3(-1, 0, 0)),
-
-		Vertex(glm::vec3(1, -1, -1), glm::vec2(1, 1), glm::vec3(1, 0, 0)),
-		Vertex(glm::vec3(1, -1, 1), glm::vec2(1, 0), glm::vec3(1, 0, 0)),
-		Vertex(glm::vec3(1, 1, 1), glm::vec2(0, 0), glm::vec3(1, 0, 0)),
-		Vertex(glm::vec3(1, 1, -1), glm::vec2(0, 1), glm::vec3(1, 0, 0)),
+		Vertex(glm::vec3(1, -1, -1), glm::vec2(1, 1), glm::vec3(0, 0, -1))
 	};
 
 	unsigned int indices[] = {0, 1, 2,
-							  0, 2, 3,
-
-							  6, 5, 4,
-							  7, 6, 4,
-
-							  10, 9, 8,
-							  11, 10, 8,
-
-							  12, 13, 14,
-							  12, 14, 15,
-
-							  16, 17, 18,
-							  16, 18, 19,
-
-							  22, 21, 20,
-							  23, 22, 20
+							  0, 2, 3
 	                          };
 
-	Camera camera(glm::vec3(0.0f, 0.0f, -5.0f), 70.0f, (float)DISPLAY_WIDTH/(float)DISPLAY_HEIGHT, 0.1f, 100.0f);
+	Camera camera(glm::vec3(0.0f, 0.0f, -5.0f), 70.0f, (float)DISPLAY_WIDTH/(float)DISPLAY_HEIGHT, 0.1f, 300.0f);
 	Shader shader("./res/basicShader");
-	// Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]), indices, sizeof(indices)/sizeof(indices[0]));
-	Mesh monkey("./res/peixinhow.obj");
+	Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]), indices, sizeof(indices)/sizeof(indices[0]));
+	// Mesh monkey("./res/peixinhow.obj");
 	Texture texture("./res/bricks.jpg");
 	Transform transform;
 
@@ -80,21 +40,22 @@ int main(int argc, char** argv)
 	for (i = 0; i < n; i++)
 		std::cout << glGetStringi(GL_EXTENSIONS,i) << std::endl;
 	*/
-	transform.GetScale()->x = transform.GetScale()->x/3;
-	transform.GetScale()->y = transform.GetScale()->y/3;
-	transform.GetScale()->z = transform.GetScale()->z/3;
+	transform.GetScale()->x = transform.GetScale()->x/2;
+	transform.GetScale()->y = transform.GetScale()->y/2;
+	transform.GetScale()->z = transform.GetScale()->z/2;
+	transform.GetRot()->x = glm::radians(-45.0f);
 	SDL_Event e;
 	bool isRunning = true;
 	float counter = 0.0f;
 
 	//The frames per second timer
-	LTimer fpsTimer;
-
-	//Start counting frames per second
-	int countedFrames = 0;
-	double deltaTime=0;
-	int lastFrame=SDL_GetTicks();
+	Timer fpsTimer;
+	fpsTimer.requestFrameRate(60);
 	fpsTimer.start();
+	int fps = 0;
+
+	float sinCounter=0;
+	float absSinCounter=0;
 
 	while(isRunning)
 	{
@@ -106,44 +67,28 @@ int main(int argc, char** argv)
 
 		display.Clear(0.0f, 0.3f, 0.6f, 1.0f);
 
-		float sinCounter = sinf(counter);
-		float absSinCounter = std::abs(sinCounter);
+		sinCounter = sinf(counter);
+		absSinCounter = std::abs(sinCounter);
 
 		transform.GetPos()->x = sinCounter;
-		transform.GetRot()->y = counter * 2;
-		// transform.GetRot()->z = counter * 2;
+		// transform.GetRot()->y = counter * 2;
+		// transform.GetRot()->z = sinCounter*3;
 
 
 		shader.Bind();
 		texture.Bind();
 		shader.Update(transform, camera);
-		// mesh.Draw();
-		monkey.Draw();
+		mesh.Draw();
+		// monkey.Draw();
 
 		display.SwapBuffers();
 		counter += 0.01f;
 
-		//Calculate and correct fps
-		float avgFPS = countedFrames / ( fpsTimer.getTicks() / 1000.f );
-		deltaTime = SDL_GetTicks()-lastFrame;
-		if( avgFPS > 2000000 )
-		{
-			avgFPS = 0;
-		}
 
-		//If a second has passed since the caption was last updated
-        if( fpsTimer.getTicks() > 1000 )
-        {
-			std::cout << "Last frame: " << deltaTime << "\n";
-			std::cout << "Last frame: " << deltaTime << "\n";
-			std::cout << "Last frame: " << deltaTime << "\n";
-			std::cout << "Last frame: " << deltaTime << "\n";
-		}
-
-        //Calculate the frames per second
-        std::cout << "Average Frames Per Second: " << avgFPS << "\n";
-		lastFrame = SDL_GetTicks();
-		++countedFrames;
+		std::cout << "Time between frames: " << fpsTimer.deltaTime() << "\n";
+		fps = fpsTimer.update();
+		std::cout << "FPS: " << fps << "\n";
+		std::cout << "FPS: " << fps << "\n";
 	}
 
 	return 0;
