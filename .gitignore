@@ -1,0 +1,10 @@
+# Exclua tudo q nao tem extensao
+*
+!/**/
+!*.*
+
+.git/
+
+.DS_Store
+
+*.o
