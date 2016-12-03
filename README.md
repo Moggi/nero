@@ -1,8 +1,7 @@
-# sdl-playground
-Some tests made to learn SDL + OpenGL
+# Nero
+A micro SDL framework for 3D animation
 
 Everything from December 2014
-
 
 ## Dependences
 
@@ -21,8 +20,7 @@ Everything from December 2014
 This was made on a MacBook Pro (mid 2012)
 with an Intel HD 4000
 
-Compiled over OS X Mavericks (2014)
-and OS X El Capitan (2016) with clang++
+Compiled over macOS Sierra 10.12 (2016) with clang++
 
 __Libraries installed with [HomeBrew](http://brew.sh)__
 
