@@ -33,8 +33,6 @@ Display::Display(int width, int height, const std::string& title)
 		std::cerr << "Glew failed to initialize!" << std::endl;
     }
 
-	// SDL_GL_SetSwapInterval(0);
-
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -48,13 +46,25 @@ Display::~Display()
 	SDL_Quit();
 }
 
-void Display::Clear(float r, float g, float b, float a)
+void Display::clear(float r, float g, float b, float a)
 {
 	glClearColor(r, g, b, a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Display::SwapBuffers()
+void Display::swapBuffers()
 {
 	SDL_GL_SwapWindow(m_window);
+}
+
+void Display::setVsync(bool vsync)
+{
+	if( vsync && SDL_GL_SetSwapInterval(1) )
+	{
+		std::cerr << "Can not turn on vsync" << std::endl;
+	}
+	else if( !vsync && SDL_GL_SetSwapInterval(0) )
+	{
+		std::cerr << "Can not turn on vsync" << std::endl;
+	}
 }
