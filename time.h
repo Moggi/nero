@@ -6,7 +6,7 @@
 class Time
 {
     public:
-		Time();
+		Time(bool);
 
 		void start();
 		void stop();
@@ -39,16 +39,16 @@ class Time
         double mAvgFPS;
         double mAverageDeltaTime;
 
-		//The timer status
+		bool mShowFPS;
 		bool mPaused;
 		bool mStarted;
 
         Uint32 deltaTimeNotDelayed();
 };
 
-Time::Time()
+Time::Time(bool showFPS)
 {
-    //Initialize the variables
+    mShowFPS = showFPS;
     mStartTicks = 0;
     mPausedTicks = 0;
 
@@ -117,7 +117,8 @@ int Time::update()
     mAfterDelay = SDL_GetTicks();
 
     mAverageDeltaTime = (mAverageDeltaTime + deltaFrameRate)/2;
-    fps();
+    if( mShowFPS )
+        fps();
 
     return deltaFrameRate;
 }

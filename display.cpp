@@ -26,17 +26,26 @@ Display::Display(int width, int height, const std::string& title)
 
 	m_glContext = SDL_GL_CreateContext(m_window);
 
+	// Glew will help to see what the drivers support
+	// if not Initialized, better quit
 	glewExperimental = GL_TRUE;
 	GLenum res = glewInit();
     if(res != GLEW_OK)
     {
 		std::cerr << "Glew failed to initialize!" << std::endl;
     }
+	if(!GLEW_ARB_vertex_array_object)
+	{
+		std::cout << "ARB_vertex_array_object not available." << std::endl;
+	}
 
 	glEnable(GL_DEPTH_TEST);
+	// glEnable(GL_LINE_SMOOTH);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	//
+	glFrontFace(GL_FRONT);
+	// glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	// glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
 
 Display::~Display()
