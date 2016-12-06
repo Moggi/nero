@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 
 	Mesh monkey("./res/peixinhow.obj");
 	Texture texture;
-	SDL_Color color = { 255, 0, 0, 0 };
+	SDL_Color color = { 255, 255, 255, 0 };
 	// texture.loadFromFile("./res/bricks.jpg");
 	texture.loadFromText(
 		"Game Over",
@@ -77,8 +77,8 @@ int main(int argc, char** argv)
 		sinCounter = sinf(counter);
 		absSinCounter = std::abs(sinCounter);
 
-		transform.GetPos()->x = sinCounter * 0.1f;
-		transform.GetPos()->y = sinCounter * 0.1f;
+		// transform.GetPos()->x = sinCounter * 0.1f;
+		// transform.GetPos()->y = sinCounter * 0.1f;
 		// transform.GetPos()->x = counter * 0.1f;
 		transform.GetRot()->y = counter * 2;
 		transform.GetRot()->z = sinCounter*3;

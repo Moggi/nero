@@ -10,7 +10,7 @@ public:
 	Texture(){}
 
 	void loadFromFile(const std::string&);
-	void loadFromText(const std::string&,const std::string&,SDL_Color,int);
+	void loadFromText(const std::string&,const std::string&,SDL_Color&,int);
 
 	void Bind();
 
@@ -20,7 +20,7 @@ private:
 	Texture(const Texture& texture) {}
 	void operator=(const Texture& texture) {}
 
-	void setUpTexture(void*,int,int,GLuint,GLenum);
+	void setUpTexture(unsigned char*,int,int);
 
 	GLuint m_texture;
 };
