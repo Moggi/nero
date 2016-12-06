@@ -13,6 +13,9 @@
 static const int DISPLAY_WIDTH = 800;
 static const int DISPLAY_HEIGHT = 600;
 
+const char * DataPath(void);
+
+const std::string data_path = DataPath();
 
 int main(int argc, char** argv)
 {
@@ -24,21 +27,21 @@ int main(int argc, char** argv)
 
 	Shader shader("./res/basicShader");
 
-
 	Plane plane(4,4);
 	Cube cube;
 
-
-	// Mesh monkey("./res/peixinhow.obj");
-	Texture texture("./res/bricks.jpg");
+	Mesh monkey("./res/peixinhow.obj");
+	Texture texture;
+	SDL_Color color = { 255, 0, 0, 0 };
+	// texture.loadFromFile("./res/bricks.jpg");
+	texture.loadFromText(
+		"Game Over",
+        data_path + "res/sample.ttf",
+        color,
+        32
+	);
 	Transform transform;
 
-	/*
-	GLint n, i;
-	glGetIntegerv(GL_NUM_EXTENSIONS, &n);
-	for (i = 0; i < n; i++)
-		std::cout << glGetStringi(GL_EXTENSIONS,i) << std::endl;
-	*/
 	// transform.GetScale()->x = transform.GetScale()->x/2;
 	// transform.GetScale()->y = transform.GetScale()->y/2;
 	// transform.GetScale()->z = transform.GetScale()->z/2;
@@ -49,12 +52,17 @@ int main(int argc, char** argv)
 	float counter = 0.0f;
 
 	//The frames per second timer
-	Time fpsTime(false);
+	Time fpsTime;
+	fpsTime.showFPS(false);
 	fpsTime.requestFrameRate(60);
 	fpsTime.start();
 
 	float sinCounter=0;
 	float absSinCounter=0;
+
+	float _Value1=1.0f;
+	float _Value2=1.0f;
+	float _Value3=1.0f;
 
 	while(isRunning)
 	{
@@ -70,16 +78,19 @@ int main(int argc, char** argv)
 		absSinCounter = std::abs(sinCounter);
 
 		transform.GetPos()->x = sinCounter * 0.1f;
-		// transform.GetPos()->y = sinCounter * 0.1f;
+		transform.GetPos()->y = sinCounter * 0.1f;
 		// transform.GetPos()->x = counter * 0.1f;
-		// transform.GetRot()->y = counter * 2;
-		// transform.GetRot()->z = sinCounter*3;
+		transform.GetRot()->y = counter * 2;
+		transform.GetRot()->z = sinCounter*3;
+
+		_Value1 = absSinCounter * 1.2f + 1.0f;
 
 		shader.Bind();
 		texture.Bind();
-		shader.Update(transform, camera);
-		// cube.Draw();
-		plane.Draw();
+		shader.Update(transform, camera,_Value1,_Value1,_Value1);
+
+		cube.Draw();
+		// plane.Draw();
 		// monkey.Draw();
 
 		display.swapBuffers();
@@ -88,6 +99,17 @@ int main(int argc, char** argv)
 		fpsTime.update();
 	}
 
-
 	return 0;
+}
+
+const char * DataPath( void ){
+    std::string data_path;
+    char * base_path = SDL_GetBasePath();
+    if (base_path) {
+        data_path = SDL_strdup(base_path);
+        SDL_free(base_path);
+    } else {
+        data_path = SDL_strdup("./");
+    }
+    return data_path.c_str();
 }

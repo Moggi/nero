@@ -51,57 +51,81 @@ void Cube::makeCube(int offsetX, int offsetY, int offsetZ)
 
     int i=0;
     mVertices[i].SetPos(glm::vec3(-1+offsetX, -1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,0));
     mVertices[i++].SetNormal(glm::vec3(0, 0, -1));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, 1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,0));
     mVertices[i++].SetNormal(glm::vec3(0, 0, -1));
     mVertices[i].SetPos(glm::vec3(1+offsetX, 1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,1));
     mVertices[i++].SetNormal(glm::vec3(0, 0, -1));
     mVertices[i].SetPos(glm::vec3(1+offsetX, -1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,1));
     mVertices[i++].SetNormal(glm::vec3(0, 0, -1));
 
     mVertices[i].SetPos(glm::vec3(-1+offsetX, -1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,0));
     mVertices[i++].SetNormal(glm::vec3(0, 0, 1));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, 1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,0));
     mVertices[i++].SetNormal(glm::vec3(0, 0, 1));
     mVertices[i].SetPos(glm::vec3(1+offsetX, 1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,1));
     mVertices[i++].SetNormal(glm::vec3(0, 0, 1));
     mVertices[i].SetPos(glm::vec3(1+offsetX, -1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,1));
     mVertices[i++].SetNormal(glm::vec3(0, 0, 1));
 
     mVertices[i].SetPos(glm::vec3(-1+offsetX, -1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,1));
     mVertices[i++].SetNormal(glm::vec3(0, -1, 0));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, -1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,1));
     mVertices[i++].SetNormal(glm::vec3(0, -1, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, -1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,0));
     mVertices[i++].SetNormal(glm::vec3(0, -1, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, -1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,0));
     mVertices[i++].SetNormal(glm::vec3(0, -1, 0));
 
     mVertices[i].SetPos(glm::vec3(-1+offsetX, 1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,1));
     mVertices[i++].SetNormal(glm::vec3(0, 1, 0));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, 1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,1));
     mVertices[i++].SetNormal(glm::vec3(0, 1, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, 1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,0));
     mVertices[i++].SetNormal(glm::vec3(0, 1, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, 1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,0));
     mVertices[i++].SetNormal(glm::vec3(0, 1, 0));
 
     mVertices[i].SetPos(glm::vec3(-1+offsetX, -1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,1));
     mVertices[i++].SetNormal(glm::vec3(-1, 0, 0));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, -1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,0));
     mVertices[i++].SetNormal(glm::vec3(-1, 0, 0));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, 1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,0));
     mVertices[i++].SetNormal(glm::vec3(-1, 0, 0));
     mVertices[i].SetPos(glm::vec3(-1+offsetX, 1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,1));
     mVertices[i++].SetNormal(glm::vec3(-1, 0, 0));
 
     mVertices[i].SetPos(glm::vec3(1+offsetX, -1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,1));
     mVertices[i++].SetNormal(glm::vec3(1, 0, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, -1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(1,0));
     mVertices[i++].SetNormal(glm::vec3(1, 0, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, 1+offsetY, 1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,0));
     mVertices[i++].SetNormal(glm::vec3(1, 0, 0));
     mVertices[i].SetPos(glm::vec3(1+offsetX, 1+offsetY, -1+offsetZ));
+    mVertices[i].SetTexCoord(glm::vec2(0,1));
     mVertices[i++].SetNormal(glm::vec3(1, 0, 0));
 
     i=0;
@@ -141,25 +165,6 @@ void Cube::makeCube(int offsetX, int offsetY, int offsetZ)
     mIndices[i++] = 23;
     mIndices[i++] = 22;
     mIndices[i++] = 20;
-
-    // {0, 1, 2,
-    // 0, 2, 3,
-    //
-    // 6, 5, 4,
-    // 7, 6, 4,
-    //
-    // 10, 9, 8,
-    // 11, 10, 8,
-    //
-    // 12, 13, 14,
-    // 12, 14, 15,
-    //
-    // 16, 17, 18,
-    // 16, 18, 19,
-    //
-    // 22, 21, 20,
-    // 23, 22, 20
-    // };
 }
 
 void Cube::Draw()

@@ -7,7 +7,10 @@
 class Texture
 {
 public:
-	Texture(const std::string& fileName);
+	Texture(){}
+
+	void loadFromFile(const std::string&);
+	void loadFromText(const std::string&,const std::string&,SDL_Color,int);
 
 	void Bind();
 
@@ -16,6 +19,8 @@ protected:
 private:
 	Texture(const Texture& texture) {}
 	void operator=(const Texture& texture) {}
+
+	void setUpTexture(void*,int,int,GLuint,GLenum);
 
 	GLuint m_texture;
 };

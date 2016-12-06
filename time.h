@@ -6,13 +6,14 @@
 class Time
 {
     public:
-		Time(bool);
+		Time();
 
 		void start();
 		void stop();
 		void pause();
 		void unpause();
 
+        void showFPS(bool);
         double fps();
         int update();
         Uint32 deltaTime();
@@ -46,9 +47,9 @@ class Time
         Uint32 deltaTimeNotDelayed();
 };
 
-Time::Time(bool showFPS)
+Time::Time()
 {
-    mShowFPS = showFPS;
+    mShowFPS = false;
     mStartTicks = 0;
     mPausedTicks = 0;
 
@@ -61,6 +62,11 @@ Time::Time(bool showFPS)
     mTotalTime = SDL_GetTicks();
     mAfterDelay = SDL_GetTicks();
     mBeforeDelay = SDL_GetTicks();
+}
+
+void Time::showFPS(bool showFps)
+{
+    mShowFPS = showFps;
 }
 
 void Time::start()

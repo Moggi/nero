@@ -31,7 +31,7 @@ public:
 	void SetPos(const glm::vec3& pos) {
 		mPosition = pos;
 	}
-	void SetTexCoord(const glm::vec3& texCoords) {
+	void SetTexCoord(const glm::vec2& texCoords) {
 		mTextureCoordinates = texCoords;
 	}
 	void SetNormal(const glm::vec3& normal) {
@@ -59,6 +59,7 @@ class Mesh
 public:
     Mesh(const std::string& fileName);
 	// Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
+	void Draw();
 
 	virtual ~Mesh();
 protected:
