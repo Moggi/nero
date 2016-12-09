@@ -94,6 +94,7 @@ void Mesh::Draw()
 {
     DrawTriangles();
 }
+
 void Mesh::DrawTriangleStrip()
 {
 	glBindVertexArray(m_vertexArrayObject);

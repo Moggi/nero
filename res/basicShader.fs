@@ -10,10 +10,10 @@ uniform vec3 lightDirection;
 
 void main()
 {
-	outColor = texture(sampler, texCoord0) *
-	//	vec4(0.21, 0.086, 0.33, 1.0) * 1.8 *
-		clamp(dot(-lightDirection, normal0), 0.0, 1.0);
+	vec2 flipped_texcoord = vec2(texCoord0.x, 1.0 - texCoord0.y);
+	outColor =
+		texture(sampler, flipped_texcoord) *
+	//	vec4(0.21, 0.086, 0.33, 1.0) * 1.5 *
+		clamp(dot(-lightDirection * 1.5, normal0), 0.0, 1.0);
 
-	//outColor = vec4(0.21, 0.086, 0.33, 1.0) * 1.8 *
-	//	clamp(dot(-lightDirection, normal0), 0.0, 1.0);
 }

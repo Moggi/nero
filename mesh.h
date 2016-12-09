@@ -13,7 +13,7 @@ public:
 	Vertex()
 	{
 		mNormal = glm::vec3(0);
-		mPosition = glm::vec3(0);
+		mPosition = glm::vec3(0.0f);
 		mTextureCoordinates = glm::vec2(0);
 	}
 

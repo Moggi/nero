@@ -13,10 +13,6 @@
 static const int DISPLAY_WIDTH = 800;
 static const int DISPLAY_HEIGHT = 600;
 
-const char * DataPath(void);
-
-const std::string data_path = DataPath();
-
 int main(int argc, char** argv)
 {
 	Display display(DISPLAY_WIDTH, DISPLAY_HEIGHT, "OpenGL 3D");
@@ -30,23 +26,27 @@ int main(int argc, char** argv)
 	Plane plane(4,4);
 	Cube cube;
 
-	Mesh monkey("./res/peixinhow.obj");
+	// Mesh monkey("./res/peixinhow.obj");
+	Mesh lamborghini("./res/lamborghini/lamborghini.obj");
+
 	Texture texture;
 	SDL_Color color = { 255, 255, 255, 0 };
+
+	texture.loadFromFile("./res/lamborghini/lamborghini.png");
 	// texture.loadFromFile("./res/bricks.jpg");
-	texture.loadFromText(
-		"Game Over",
-        data_path + "res/sample.ttf",
-        color,
-        32
-	);
+	// texture.loadFromText(
+	// 	"Game Over",
+    //     "./res/sample.ttf",
+    //     color,
+    //     32
+	// );
 	Transform transform;
 
 	// transform.GetScale()->x = transform.GetScale()->x/2;
 	// transform.GetScale()->y = transform.GetScale()->y/2;
 	// transform.GetScale()->z = transform.GetScale()->z/2;
-	transform.GetPos()->z = 2;
-	transform.GetRot()->x = glm::radians(45.0f);
+	transform.GetPos()->z = 0;
+	transform.GetRot()->x = glm::radians(-20.0f);
 	SDL_Event e;
 	bool isRunning = true;
 	float counter = 0.0f;
@@ -80,16 +80,17 @@ int main(int argc, char** argv)
 		// transform.GetPos()->x = sinCounter * 0.1f;
 		// transform.GetPos()->y = sinCounter * 0.1f;
 		// transform.GetPos()->x = counter * 0.1f;
-		transform.GetRot()->y = counter * 2;
-		transform.GetRot()->z = sinCounter*3;
+		transform.GetRot()->y = counter * 0.9;
+		// transform.GetRot()->z = sinCounter*3;
 
-		_Value1 = absSinCounter * 1.2f + 1.0f;
+		_Value1 = absSinCounter * 0.0f + 1.0f;
 
 		shader.Bind();
 		texture.Bind();
 		shader.Update(transform, camera,_Value1,_Value1,_Value1);
 
-		cube.Draw();
+		// cube.Draw();
+		lamborghini.Draw();
 		// plane.Draw();
 		// monkey.Draw();
 
@@ -100,16 +101,4 @@ int main(int argc, char** argv)
 	}
 
 	return 0;
-}
-
-const char * DataPath( void ){
-    std::string data_path;
-    char * base_path = SDL_GetBasePath();
-    if (base_path) {
-        data_path = SDL_strdup(base_path);
-        SDL_free(base_path);
-    } else {
-        data_path = SDL_strdup("./");
-    }
-    return data_path.c_str();
 }

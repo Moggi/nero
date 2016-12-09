@@ -23,7 +23,7 @@ private:
     Vertex * mVertices;
     Uint32 * mIndices;
 
-    void makePlane(int,int,int);
+    void makePlane(float,float,int);
 
 };
 
@@ -44,7 +44,7 @@ Plane::Plane(int rows, int columns)
     mVertices = new Vertex[mNumberVertices];
     mIndices = new Uint32[mNumberIndices];
 
-    makePlane(-mColumns/2,-mRows/2,0);
+    makePlane(-mColumns/2.0f,-mRows/2.0f,0);
 
     Init(mVertices, mNumberVertices, mIndices, mNumberIndices);
 }
@@ -56,7 +56,7 @@ Plane::~Plane()
 }
 
 
-void Plane::makePlane(int offsetX, int offsetY, int offsetZ)
+void Plane::makePlane(float offsetX, float offsetY, int offsetZ)
 {
     int width = mColumns+1;
     int height = mRows+1;
@@ -71,9 +71,14 @@ void Plane::makePlane(int offsetX, int offsetY, int offsetZ)
             mVertices[i].GetPos()->x = x+offsetX;
             mVertices[i].GetPos()->y = y+offsetY;
             mVertices[i].GetPos()->z = offsetZ;
+            mVertices[i].SetTexCoord(glm::vec2(x*1.0/mColumns, y*1.0/mRows));
             mVertices[i].SetNormal(glm::vec3(0, 0, -1));
         }
     }
+    // mVertices[0].SetTexCoord(glm::vec2(1, 1));
+    // mVertices[height-1].SetTexCoord(glm::vec2(1, 1));
+    // mVertices[width-1].SetTexCoord(glm::vec2(1, 1));
+    // mVertices[width-1 + height-1].SetTexCoord(glm::vec2(0, 0));
 
     i = 0;
     // Set up indices
