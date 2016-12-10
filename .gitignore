@@ -4,8 +4,8 @@
 !*.*
 
 .git/
-.obj/
-.bin/
+obj/
+bin/
 
 .DS_Store
 
