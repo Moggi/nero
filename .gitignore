@@ -4,7 +4,12 @@
 !*.*
 
 .git/
+.obj/
+.bin/
 
 .DS_Store
 
 *.o
+
+# dont forget this buddy
+!Makefile

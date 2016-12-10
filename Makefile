@@ -1,5 +1,9 @@
 ########################## Makefile ##########################
+# thanks to this guys:
 # https://github.com/CELTAB/AVR-Util/blob/master/tools/Makefile
+
+# Just remember
+# CURRENT_DIR = $(CURDIR)
 
 LIBS = -lGLEW -lSDL2 -lSDL2_image -lSDL2_ttf
 FRAMEWORKS = -framework OpenGL
@@ -12,38 +16,32 @@ LDFLAGS = -L$(LIB_DIR) $(LIBS) -I$(INCLUDE_DIR) $(FRAMEWORKS)
 
 MAIN = main.cpp
 
-EXTRA_SOURCE_DIR =
-EXTRA_SOURCE_FILES =
+OBJ_DIR = obj
+SRC_DIR = .
+BIN_DIR = bin
 
-LOCAL_SOURCE = $(wildcard *.cpp)
+FOLDERS = $(OBJ_DIR) $(SRC_DIR) $(BIN_DIR)
+
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+HEADERS = $(wildcard $(SRC_DIR)/*.h)
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 TARGET = $(strip $(basename $(MAIN)))
-EXEC = $(TARGET)
 
-EXTRA_SOURCE = $(addprefix $(EXTRA_SOURCE_DIR), $(EXTRA_SOURCE_FILES))
-SRC = $(EXTRA_SOURCE)
-SRC += $(subst ${MAIN},,${LOCAL_SOURCE})
-
-OBJ = $(SRC:.cpp=.o)
-
-HEADERS = $(SRC:.cpp=.h)
+EXEC = $(addprefix $(BIN_DIR)/, $(TARGET))
 
 
-# all: ftest
-# ftest: $(CPPSOURCES:.cpp=.o)
-# 	g++ -o $@ $^ $(LDFLAGS)
-# %.o: %.cpp
-# 	g++ -c $< $(CPPFLAGS) -o $@
+all: $(OBJECTS)
+	$(CC) $(CXXFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXEC)
 
-all: $(OBJ)
-	$(CC) $(MAIN) $(CXXFLAGS) $(LDFLAGS) $(OBJ) -o $(EXEC)
-
-%.o: %.cpp
-	@echo $<
+$(OBJECTS): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
 	$(CC) -c $(CXXFLAGS) $< $(LDFLAGS) -o $@
 
+install:
+	mkdir -p $(FOLDERS)
+
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJECTS)
 
 mrproper: clean
 	rm -f $(EXEC)
