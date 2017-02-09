@@ -9,12 +9,12 @@ LIBS = -lGLEW -lSDL2 -lSDL2_image -lSDL2_ttf
 FRAMEWORKS = -framework OpenGL
 
 CC = clang++
-CXXFLAGS = -std=c++11
+CXXFLAGS = -w -std=c++11
 INCLUDE_DIR = /usr/local/include
 LIB_DIR = /usr/local/lib
 LDFLAGS = -L$(LIB_DIR) $(LIBS) -I$(INCLUDE_DIR) $(FRAMEWORKS)
 
-MAIN = main.cpp
+MAIN = ${NAME}
 
 OBJ_DIR = obj
 SRC_DIR = .

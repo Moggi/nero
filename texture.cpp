@@ -6,7 +6,7 @@
 #include <iostream>
 
 void Texture::loadFromText(const std::string & message, const std::string & fontFile,
-	SDL_Color &color, int fontSize)
+	SDL_Color color, int fontSize)
 {
     if(!TTF_WasInit() && TTF_Init()==-1) {
 		std::cerr << "Missing library. Could not initialize TTF module" << std::endl;
@@ -19,14 +19,14 @@ void Texture::loadFromText(const std::string & message, const std::string & font
 		return ;
 	}
 
-	SDL_Surface * surf = TTF_RenderText_Blended(font, message.c_str(), color);
+	SDL_Surface * surf = TTF_RenderUTF8_Blended(font, message.c_str(), color);
 	if (surf == NULL){
 		TTF_CloseFont(font);
 		std::cerr << "Could not render a text" << std::endl;
 		return ;
 	}
 	SDL_Surface * newSurface =
-		SDL_CreateRGBSurface(0, surf->w, surf->h, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+		SDL_CreateRGBSurface(0, surf->w, surf->h, 32, 0, 0, 0, 0);
 	SDL_BlitSurface(surf, 0, newSurface, 0); // Blit onto a purely RGB SurfaceSDL_Surface *image = SDL_CreateRGBSurface(0, LoadedImage->w, LoadedImage->h, 16, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 
 	SDL_LockSurface(newSurface);

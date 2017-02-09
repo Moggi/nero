@@ -6,5 +6,6 @@ then
 else
     file="$1"
 fi
-file="bin/${file}"
-make -s && [[ -r ./$file ]] && ./$file
+file_complete="bin/${file}"
+time make -s "NAME=${file}"
+[[ -r ./$file_complete ]] && ./$file_complete

@@ -24,9 +24,7 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[0] = glGetUniformLocation(m_program, "MVP");
 	m_uniforms[1] = glGetUniformLocation(m_program, "Normal");
 	m_uniforms[2] = glGetUniformLocation(m_program, "lightDirection");
-	m_uniforms[3] = glGetUniformLocation(m_program, "_Value1");
-	m_uniforms[4] = glGetUniformLocation(m_program, "_Value2");
-	m_uniforms[5] = glGetUniformLocation(m_program, "_Value3");
+	m_uniforms[3] = glGetUniformLocation(m_program, "lightDirection2");
 }
 
 Shader::~Shader()
@@ -45,8 +43,7 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-void Shader::Update(const Transform& transform, const Camera& camera,
-		float _Value1, float _Value2, float _Value3)
+void Shader::Update(const Transform& transform, const Camera& camera)
 {
 	glm::mat4 MVP = transform.GetMVP(camera);
 	glm::mat4 Normal = transform.GetModel();
@@ -54,9 +51,7 @@ void Shader::Update(const Transform& transform, const Camera& camera,
 	glUniformMatrix4fv(m_uniforms[0], 1, GL_FALSE, &MVP[0][0]);
 	glUniformMatrix4fv(m_uniforms[1], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[2], 0.0f, 0.0f, 1.0f);
-	glUniform1f(m_uniforms[3], _Value1);
-	glUniform1f(m_uniforms[4], _Value2);
-	glUniform1f(m_uniforms[5], _Value3);
+	glUniform3f(m_uniforms[3], 0.0f, -1.0f, 0.0f);
 }
 
 std::string Shader::LoadShader(const std::string& fileName)

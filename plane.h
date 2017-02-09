@@ -3,9 +3,10 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "mesh.h"
+#include "gameobject.h"
 
-
-class Plane : public Mesh
+class Plane : public Mesh, public GameObject
 {
 public:
 
@@ -69,8 +70,8 @@ void Plane::makePlane(float offsetX, float offsetY, int offsetZ)
         {
             i = y * width + x;
             mVertices[i].GetPos()->x = x+offsetX;
-            mVertices[i].GetPos()->y = y+offsetY;
-            mVertices[i].GetPos()->z = offsetZ;
+            mVertices[i].GetPos()->z = y+offsetY;
+            mVertices[i].GetPos()->y = offsetZ;
             mVertices[i].SetTexCoord(glm::vec2(x*1.0/mColumns, y*1.0/mRows));
             mVertices[i].SetNormal(glm::vec3(0, 0, -1));
         }
@@ -104,6 +105,7 @@ void Plane::makePlane(float offsetX, float offsetY, int offsetZ)
 
 void Plane::Draw()
 {
+    GetTexture()->Bind();
 	DrawTriangleStrip();
 }
 

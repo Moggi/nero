@@ -3,9 +3,10 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "mesh.h"
+#include "gameobject.h"
 
-
-class Cube : public Mesh
+class Cube : public Mesh, public GameObject
 {
 public:
 
@@ -169,6 +170,7 @@ void Cube::makeCube(int offsetX, int offsetY, int offsetZ)
 
 void Cube::Draw()
 {
+    GetTexture()->Bind();
 	DrawTriangles();
 }
 

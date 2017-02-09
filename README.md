@@ -1,7 +1,7 @@
 # Nero
 A micro SDL framework for 3D animation
 
-Everything from December 2014
+Everything from 2016~2017
 
 ## Dependences
 
@@ -10,7 +10,6 @@ Everything from December 2014
 - [SDL2](https://www.libsdl.org/download-2.0.php)
 - [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 - [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
-- [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
 - [GLM](http://glm.g-truc.net)
 - [GLEW](http://glew.sourceforge.net)
 
@@ -20,12 +19,12 @@ Everything from December 2014
 This was made on a MacBook Pro (mid 2012)
 with an Intel HD 4000
 
-Compiled over macOS Sierra 10.12 (2016) with clang++
+Compiled over macOS Sierra 10.12 (2017) with clang++
 
 __Libraries installed with [HomeBrew](http://brew.sh)__
 
 ```sh
-brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer glm glew
+brew install sdl2 sdl2_image sdl2_ttf glm glew
 ```
 
 #### Usage
@@ -33,12 +32,14 @@ brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer glm glew
 ```sh
 chmod +x compile.sh
 ./compile.sh <filename>
-# where `<filename>` can be main, only
-./compile.sh main
-# to see the blender monkey with brick texture :)
-```
+# where `<filename>` can be "main" or "inf"
+# main = history mode
+# inf = infinity runner mode
 
-![](res/preview.tiff)
+# You need to move main.cpp OR inf.cpp from src/ to current dir
+# It will not compile any of the two if the other stay in the same dir.
+
+```
 
 
 ## Thanks

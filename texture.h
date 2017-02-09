@@ -10,7 +10,7 @@ public:
 	Texture(){}
 
 	void loadFromFile(const std::string&);
-	void loadFromText(const std::string&,const std::string&,SDL_Color&,int);
+	void loadFromText(const std::string&,const std::string&,SDL_Color,int);
 
 	void Bind();
 

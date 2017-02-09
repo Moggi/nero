@@ -135,10 +135,12 @@ double Time::fps()
     if( timeElapsed >= 1000 )
     {
         mAvgFPS = (double)timeElapsed / mAverageDeltaTime;
-        std::cout << "Time elapsed: " << timeElapsed << "ms\n";
-        std::cout << "Average time between frames: " << mAverageDeltaTime << "ms\n";
-        std::cout << "Current FPS: " << mAvgFPS << "\n";
-        std::cout << "==========================================\n";
+        if( mShowFPS ){
+            std::cout << "Time elapsed: " << timeElapsed << "ms\n";
+            std::cout << "Average time between frames: " << mAverageDeltaTime << "ms\n";
+            std::cout << "Current FPS: " << mAvgFPS << "\n";
+            std::cout << "==========================================\n";
+        }
         mTotalTime = SDL_GetTicks();
     }
 

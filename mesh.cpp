@@ -90,11 +90,6 @@ void Mesh::DrawTriangles()
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw()
-{
-    DrawTriangles();
-}
-
 void Mesh::DrawTriangleStrip()
 {
 	glBindVertexArray(m_vertexArrayObject);

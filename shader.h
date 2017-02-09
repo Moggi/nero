@@ -11,13 +11,13 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind();
-	void Update(const Transform& transform, const Camera& camera,float,float,float);
+	void Update(const Transform& transform, const Camera& camera);
 
 	virtual ~Shader();
 protected:
 private:
 	static const unsigned int NUM_SHADERS = 2;
-	static const unsigned int NUM_UNIFORMS = 6;
+	static const unsigned int NUM_UNIFORMS = 3;
 	void operator=(const Shader& shader) {}
 	Shader(const Shader& shader) {}
 

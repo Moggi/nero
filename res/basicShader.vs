@@ -9,14 +9,10 @@ out vec3 normal0;
 
 uniform mat4 MVP;
 uniform mat4 Normal;
-uniform float _Value1;
-uniform float _Value2;
-uniform float _Value3;
 
 void main()
 {
 	gl_Position = MVP * vec4(position, 1.0);
-	gl_Position.xy = gl_Position.xy * max(_Value1,1.0);
 	texCoord0 = texCoord;
 	normal0 = (Normal * vec4(normal, 0.0)).xyz;
 }
