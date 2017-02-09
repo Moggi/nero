@@ -40,6 +40,8 @@ GLfloat MIN_AC = 0.5f;
 GLfloat MAX_AC = 6.0f;
 GLfloat road_side = 1.0f;
 
+Uint32 totalTime = 0;
+
 bool isRunning = true;
 bool collision = false;
 bool restart = false;
@@ -293,8 +295,9 @@ int main(int argc, char** argv)
             shaderGUI.Update(road02.GetTransform(), camera);
     		road02.Draw();
 
+			totalTime = (SDL_GetTicks()-total_time)/1000;
     		fpsGUI.GetTexture()->loadFromText(
-    			std::to_string((int)(SDL_GetTicks()-total_time)/1000),
+    			std::to_string(totalTime),
     	        "./res/sample.ttf",
     	        WHITE,
     	        TEXTSIZE
@@ -320,8 +323,7 @@ int main(int argc, char** argv)
 // #############################################################################
 
     	historyGUI.GetTexture()->loadFromText(
-    		// "Procure o profissional",
-    		"GAME OVER",
+    		std::to_string(totalTime) + "s ",
             "./res/sample.ttf",
             WHITE,
             TEXTSIZE
@@ -330,8 +332,17 @@ int main(int argc, char** argv)
         timer = SDL_GetTicks();
     	while( isRunning && SDL_GetTicks()-timer <= 3000 )
     	{
-            if(!restart)
+			if(!restart){
                 timer = SDL_GetTicks();
+			}
+			else{
+				historyGUI.GetTexture()->loadFromText(
+		    		"GAME OVER",
+		            "./res/sample.ttf",
+		            WHITE,
+		            TEXTSIZE
+		    	);
+			}
 
             SDL_PumpEvents();
 
