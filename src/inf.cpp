@@ -490,7 +490,7 @@ int JoyStickFilter(void* userdata, SDL_Event* event)
 				case 6:		// START
 					isRunning=false;
 					break;
-                case 0:		// START
+                case 0:		// CROSS
 					restart=true;
 					break;
 			}

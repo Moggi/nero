@@ -110,7 +110,7 @@ int main(int argc, char** argv)
 	fpsTime.showFPS(false);
 	// fpsTime.requestFrameRate(60);
 	fpsTime.start();
-	// display.setVsync(false);
+	display.setVsync(false);
 
 	GLboolean SmoothState;
 
